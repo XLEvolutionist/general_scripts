@@ -34,7 +34,7 @@ while ( <FASTA> ) {
 	if ( m/>/ ) {
 		#give the sequence a new name
 		$_=~ m/chromosome\s+(\d+),/;
-		print ">$1\n";
+		print ">Chr$1\n";
 	}#if
 	else {
 		#print the line
