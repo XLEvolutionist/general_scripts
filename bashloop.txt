@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for i in $(ls *.fasta); do
+	 perl /Users/simonrenny-byfield/GitHubRepos/general_scripts/generateInterval.pl $i
+done
