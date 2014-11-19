@@ -1,7 +1,7 @@
 library(nycflights13)
 library(ggplot2)
 library(dplyr)
-
+##see http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html
 dim(flights)
 head(flights)
 
@@ -32,16 +32,17 @@ mutate(flights,loss=arr_delay-dep_delay)
 #now what about adding a new column
 mutate(flights,loss=arr_delay-dep_delay, speed=(distance/air_time)*60)
 
-#just keep the new columns..
+#just keep the new columns.. out with the old!
 transmute(flights,loss=arr_delay-dep_delay, speed=(distance/air_time)*60)
 
 #can dplyr handle matrices
 mat<-matrix(nrow=10, runif(1:100))
 colnames(mat)<-c("A","B","C","D","E","F","G","H","I","J")
 filter(mat, A >= 0.1)
+
 #does not work, turn into data.frame
 mat.df<-data.frame(mat)
-filter(mat.df, A >= 0.1, B >=0.1, C >= 0.1)
+filter(mat.df, A >=0.1, B >=0.1, C >=0.1)
 #it now works!
 
 #now find all the carriers that do that route, but with the departure times, sorted by carrier
