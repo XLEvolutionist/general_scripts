@@ -14,6 +14,7 @@ use Bio::SeqIO;
 #Initialize the Bio:SeqIO object; 
 my $seqIO = Bio::SeqIO -> new ( -format => "fasta" , -file => $ARGV[0] );
 
+#also intilize a file to contain all the nam
 #start looping through the sequences
 while ( my $seqObj = $seqIO->next_seq() ) {
 	#get the sequence id

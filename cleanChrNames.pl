@@ -31,9 +31,13 @@ open ( FASTA , "$ARGV[0]" ) || die "Could not open file:$!\n";
 
 while ( <FASTA> ) {
 	#see if the line is the header line
-	if ( m/>/ ) {
+	if ( m/(scaffold_\d+)/ ) {
+		print ">$1\n";
+		next;
+	}#if
+	if ( m/(\d+) dna:chromosome/ ) {
 		#give the sequence a new name
-		$_=~ m/chromosome\s+(\d+),/;
+		#$_=~ m/chromosome\s+(\d+),/;
 		print ">Chr$1\n";
 	}#if
 	else {

@@ -27,11 +27,14 @@ my %seq;
 while ( <FASTA> ) {
 	if  ( m/>(\S+)/ ) {
 		$name = $1;
-	}
+	}#if
 	else {
 		$seq{$name}.=$_;
 	}#else
+	
 }#while
+close FASTA;
+print "loaded in file..\n";
 
 
 #now for each sequence
@@ -43,22 +46,24 @@ for my $key ( keys ( %seq ) ) {
   			$pos = index($str, $substr, $pos + 1);
   			last if $pos < 0;
   			push ( @posi , $pos  );
-  			#print $range[$#range] , "\n";
   		}#while
   		my $ranges = &num2range(@posi);
+  		@posi=();
   		#print $ranges , "\n";
   		my @range = split /,/ , $ranges;
   		foreach (@range) {
   			my @size = split /-/, $_;
+  			next unless scalar @size > 1;
   			my $len = $size[1] - $size[0];
   			#print $size[0] ,"\t" , $size[1] ,"\t" , $len , "\n";
-  			if ( $len >= 100 ) {
-  				print OUT "$name\t$_\n";
-  			}#if
+  			#if ( $len >= 100 ) {
+  				print OUT "$name\t$size[0]\t$size[1]\n";
+  			#}#if
   		}#foreach
-  		@posi=();
+  		
 		$name = $1;
 }#
+close OUT;
 exit;
 
 
