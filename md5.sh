@@ -1,6 +1,6 @@
 #/usr/bin/bash
 
-files=$(find /dir/ -type f -name "*.txt")
+files=$(find /dir/ -type f -name "*.gz")
 
 for i in ${files}; do
 	md5 $i
